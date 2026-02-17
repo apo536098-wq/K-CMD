@@ -1,46 +1,48 @@
 # 🛡️ K-CMD // Siber Komuta Merkezi
 
-**K-CMD**, etik hackerlar ve sızma testi uzmanları için geliştirilmiş, minimalist ve yüksek performanslı bir operasyon yönetim panelidir.
-
-## 🚀 Özellikler
-
-- **🎯 Hızlı Komutlar:** Nmap, Sqlmap ve Dirsearch komutlarına anında erişim.
-- **🌐 Hedef Takibi:** Hedef IP ve zafiyet durumlarını yönetme.
-- **📝 Dinamik Notlar:** Tarayıcı tabanlı güvenli not tutma sistemi.
-- **📚 Bilgi Bankası:** Önemli portlar ve hacker sözlüğü entegrasyonu.
+**K-CMD**, etik hackerlar ve sızma testi uzmanları için geliştirilmiş, minimalist ve yüksek performanslı bir operasyon yönetim panelidir. Tüm araçlarınızı tek bir merkezden yönetin.
 
 ---
 
-## 📡 Önemli Portlar Referansı
+## 🚀 Öne Çıkan Özellikler
 
-Sızma testlerinde en sık karşılaşılan portlar:
+- **🎯 Quick Tools:** Nmap, Sqlmap ve Metasploit komutlarını tek tıkla kopyalayın.
+- **🌐 Target Management:** Hedef sistemlerin durumunu ve zafiyetlerini takip edin.
+- **📚 Bilgi Bankası:** Kritik portlar ve siber güvenlik terimleri her an elinizin altında.
+- **💾 Local Sync:** Notlarınızı tarayıcı hafızasında güvenle saklayın.
 
-| Port | Servis | Açıklama |
+---
+
+## 📡 Kritik Port Listesi
+
+Sızma testi süreçlerinde en sık analiz edilen servisler:
+
+| Port | Servis | Önem Derecesi |
 | :--- | :--- | :--- |
-| **21** | FTP | Dosya Aktarımı |
-| **22** | SSH | Güvenli Uzaktan Erişim |
-| **80** | HTTP | Web Sunucusu |
-| **443** | HTTPS | Güvenli Web |
-| **445** | SMB | Windows Dosya Paylaşımı |
-| **3389** | RDP | Uzak Masaüstü |
+| **21** | FTP | 🟡 Orta |
+| **22** | SSH | 🔴 Yüksek |
+| **80/443** | HTTP/S | 🔴 Yüksek |
+| **445** | SMB | 🔴 Kritik |
+| **3306** | MySQL | 🟠 Önemli |
+| **3389** | RDP | 🔴 Kritik |
 
 ---
 
-## 📖 Temel Hacker Sözlüğü
+## 📖 Siber Güvenlik Sözlüğü
 
-* **Exploit:** Bir sistemdeki açığı kullanmak için yazılan kod veya araç.
-* **Payload:** Hedef sisteme sızdıktan sonra çalıştırılan asıl zararlı/işlevsel kod.
-* **Reverse Shell:** Hedef makinenin, saldırganın makinesine bağlantı başlatması.
-* **Brute Force:** Bir şifreyi kırmak için tüm kombinasyonları deneme yöntemi.
-* **Privilege Escalation:** Düşük yetkili bir kullanıcıdan Admin/Root yetkisine çıkma süreci.
+* **Exploit:** Bir yazılım veya sistemdeki açıktan yararlanmak için kullanılan yöntem veya kod parçası.
+* **Payload:** Sızma gerçekleştikten sonra hedef sistemde çalıştırılacak olan asıl işlevsel kod.
+* **Reverse Shell:** Hedef makinenin, saldırganın cihazına geri bağlantı kurmasını sağlayan yöntem.
+* **Privilege Escalation:** Sistemde düşük yetkili bir kullanıcıdan yetkili (Admin/Root) seviyesine çıkma.
 
 ---
 
-## 🛠️ Kurulum ve Kullanım
+## 🛠️ Kurulum ve Çalıştırma
 
-1. Bu repository'yi klonlayın veya `index.html` dosyasını indirin.
-2. Dosyayı herhangi bir modern tarayıcıda açın.
-3. Operasyonlarınızı yönetmeye başlayın!
+Bu projeyi bilgisayarınıza klonlamak için terminale şu komutu yazın:
+
+```bash
+git clone [https://github.com/apo536098-wq/K-CMD.git](https://github.com/apo536098-wq/K-CMD.git)
 
 ## ⚠️ Yasal Uyarı (Disclaimer)
 
