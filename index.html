@@ -2,86 +2,147 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>K-CMD // Siber Karargah</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-CMD // Access Denied</title>
     <style>
-        :root { --neon: #00ff88; --bg: #050505; --card: #111; --blue: #00d4ff; }
-        body { background: var(--bg); color: #ccc; font-family: monospace; margin: 0; padding: 10px; }
-        header { border-bottom: 1px solid #222; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
+        :root { --neon: #00ff88; --bg: #050505; --card: #111; --blue: #00d4ff; --purple: #bc13fe; }
+        body { background: var(--bg); color: #ccc; font-family: 'Courier New', monospace; margin: 0; padding: 0; overflow-x: hidden; }
+        
+        /* GİRİŞ EKRANI STİLLERİ */
+        #login-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
+        }
+        .login-box { border: 1px solid var(--neon); padding: 30px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,255,136,0.2); text-align: center; }
+        .login-box h2 { color: var(--neon); letter-spacing: 5px; margin-bottom: 20px; }
+        .login-box input { 
+            background: #111; border: 1px solid #333; color: var(--neon); 
+            padding: 10px; width: 200px; text-align: center; font-family: monospace;
+            outline: none; margin-bottom: 15px;
+        }
+        .login-box button {
+            background: var(--neon); color: #000; border: none; padding: 10px 25px;
+            font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .login-box button:hover { box-shadow: 0 0 15px var(--neon); }
+
+        /* ANA PANEL (Gizli) */
+        #main-interface { display: none; padding: 10px; }
+
+        /* Üst Menü ve Diğerleri */
+        header { border-bottom: 1px solid #222; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; background: #080808; }
         .logo { display: flex; align-items: center; color: var(--neon); font-weight: bold; font-size: 20px; letter-spacing: 2px; }
-        .nav-btn { background: none; border: 1px solid #333; color: #888; padding: 5px 15px; cursor: pointer; border-radius: 4px; transition: 0.2s; font-family: monospace; }
-        .nav-btn:hover, .active { border-color: var(--neon); color: var(--neon); box-shadow: 0 0 10px rgba(0,255,136,0.2); }
-        .container { max-width: 900px; margin: 20px auto; }
-        .card { background: var(--card); border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 3px solid #333; }
-        .cmd { background: #000; color: var(--neon); padding: 10px; border-radius: 4px; cursor: pointer; font-size: 13px; margin: 5px 0; border: 1px solid #111; }
+        .logo svg { margin-right: 12px; }
+        .nav-btn { background: none; border: 1px solid #333; color: #888; padding: 6px 16px; cursor: pointer; border-radius: 4px; transition: 0.3s; font-family: monospace; font-size: 12px; margin-left: 5px; }
+        .nav-btn:hover, .active { border-color: var(--neon); color: var(--neon); box-shadow: 0 0 15px rgba(0,255,136,0.1); }
+        .container { max-width: 900px; margin: 30px auto; padding: 0 15px; }
+        .card { background: var(--card); border-radius: 8px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #333; }
+        .cmd { background: #000; color: var(--neon); padding: 12px; border-radius: 4px; cursor: pointer; font-size: 13px; margin: 8px 0; border: 1px solid #1a1a1a; }
         .cmd:hover { background: #0a0a0a; border-color: var(--neon); }
         table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        th { text-align: left; border-bottom: 1px solid #222; padding: 8px; color: #555; }
-        td { padding: 8px; border-bottom: 1px solid #181818; }
+        th { text-align: left; border-bottom: 1px solid #333; padding: 12px 8px; color: #666; }
+        td { padding: 12px 8px; border-bottom: 1px solid #181818; }
         .pwn { color: var(--neon); font-weight: bold; }
-        textarea { width: 100%; height: 100px; background: #000; color: #fff; border: 1px solid #222; padding: 10px; font-family: monospace; box-sizing: border-box; }
-        .save-btn { background: var(--neon); color: #000; border: none; padding: 8px 20px; font-weight: bold; cursor: pointer; margin-top: 10px; border-radius: 4px; }
+        textarea { width: 100%; height: 150px; background: #000; color: #00ff00; border: 1px solid #222; padding: 15px; box-sizing: border-box; }
+        .save-btn { background: var(--neon); color: #000; border: none; padding: 10px 25px; font-weight: bold; cursor: pointer; margin-top: 10px; border-radius: 4px; }
+        footer { text-align: center; margin-top: 50px; padding: 20px; border-top: 1px solid #222; color: #444; font-size: 11px; }
+
         .tab-content { display: none; }
-        .active-content { display: block; }
-        .info-box { color: var(--blue); font-size: 12px; line-height: 1.6; }
+        .active-content { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z" stroke="var(--neon)" stroke-width="2"/><path d="M7 12L17 12M12 7L12 17" stroke="var(--neon)" stroke-width="2"/></svg>
-        K-CMD
+<div id="login-screen">
+    <div class="login-box">
+        <h2>IDENTIFICATION</h2>
+        <input type="password" id="passInput" placeholder="ENTER ACCESS CODE">
+        <br>
+        <button onclick="checkAuth()">AUTHENTICATE</button>
+        <p id="msg" style="color: red; font-size: 10px; margin-top: 10px;"></p>
     </div>
-    <div>
-        <button class="nav-btn active" onclick="tab(event, 'main')">MAIN</button>
-        <button class="nav-btn" onclick="tab(event, 'h')">HACK</button>
-        <button class="nav-btn" onclick="tab(event, 't')">TARGETS</button>
-        <button class="nav-btn" onclick="tab(event, 'i')">INFO</button>
-        <button class="nav-btn" onclick="tab(event, 'n')">NOTES</button>
-    </div>
-</header>
+</div>
 
-<div class="container">
-    <div id="main" class="tab-content active-content">
-        <div class="card" style="border-color: var(--neon);">
-            <h2 style="color: var(--neon); margin-top: 0;">Sistem Durumu: ÇEVRİMİÇİ</h2>
-            <p>Hoş geldin Kadir. K-CMD operasyon merkezine erişim sağlandı.</p>
+<div id="main-interface">
+    <header>
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.47 2 2 6.47 2 12C2 17.52 6.47 22 12 22C17.52 22 22 17.52 22 12C22 6.47 17.52 2 12 2Z" stroke="var(--neon)" stroke-width="2"/><path d="M7 12H17M12 7V17" stroke="var(--neon)" stroke-width="2"/></svg>
+            K-CMD
         </div>
-    </div>
-    <div id="h" class="tab-content">
-        <div class="card" style="border-color: #ff6b6b;">
-            <small style="color:#ff6b6b">QUICK TOOLS</small>
-            <div class="cmd" onclick="cp(this)">nmap -sV -T4 target_ip</div>
-            <div class="cmd" onclick="cp(this)">dirsearch -u target_url -e php,txt</div>
-            <div class="cmd" onclick="cp(this)">sqlmap -u "url" --dbs --batch</div>
+        <div>
+            <button class="nav-btn active" onclick="tab(event, 'main')">MAIN</button>
+            <button class="nav-btn" onclick="tab(event, 'h')">HACK</button>
+            <button class="nav-btn" onclick="tab(event, 't')">TARGETS</button>
+            <button class="nav-btn" onclick="tab(event, 'i')">INFO</button>
+            <button class="nav-btn" onclick="tab(event, 'n')">NOTES</button>
         </div>
-    </div>
-    <div id="t" class="tab-content">
-        <div class="card" style="border-color: var(--neon);">
-            <table>
-                <thead><tr><th>IP / HOST</th><th>STATUS</th><th>VULN</th></tr></thead>
-                <tbody id="tbody"><tr><td>127.0.0.1</td><td class="pwn">[PWNED]</td><td>Local</td></tr></tbody>
-            </table>
-            <button class="nav-btn" style="margin-top:10px" onclick="add()">+ ADD IP</button>
+    </header>
+
+    <div class="container">
+        <div id="main" class="tab-content active-content">
+            <div class="card" style="border-color: var(--neon);">
+                <h2 style="color: var(--neon); margin-top: 0;">ERİŞİM ONAYLANDI</h2>
+                <p>Hoş geldin operatör <strong>Kadir</strong>. Sistem yetkileri tanımlandı.</p>
+            </div>
         </div>
-    </div>
-    <div id="i" class="tab-content">
-        <div class="card" style="border-color: var(--blue);">
-            <h3 style="color: var(--blue);">📡 Önemli Portlar</h3>
-            <div class="info-box">80: HTTP | 443: HTTPS | 22: SSH | 445: SMB</div>
-            <h3 style="color: var(--blue); margin-top:20px;">📖 Hacker Sözlüğü</h3>
-            <div class="info-box">Exploit: Sistem açığını kullanan kod. | Payload: Sızdıktan sonra çalışan kod.</div>
+
+        <div id="h" class="tab-content">
+            <div class="card" style="border-color: #ff6b6b;">
+                <div class="cmd" onclick="cp(this)">nmap -sV target_ip</div>
+                <div class="cmd" onclick="cp(this)">sqlmap -u "url" --batch</div>
+            </div>
         </div>
-    </div>
-    <div id="n" class="tab-content">
-        <div class="card" style="border-color: #bc13fe;">
-            <textarea id="notes" placeholder="Operasyon notları..."></textarea>
-            <button class="save-btn" onclick="save()">SAVE TO LOCAL</button>
+
+        <div id="t" class="tab-content">
+            <div class="card" style="border-color: var(--neon);">
+                <table>
+                    <thead><tr><th>IP</th><th>DURUM</th><th>ZAFİYET</th></tr></thead>
+                    <tbody id="tbody"><tr><td>127.0.0.1</td><td class="pwn">[PWNED]</td><td>Local</td></tr></tbody>
+                </table>
+                <button class="nav-btn" onclick="add()">+ HEDEF EKLE</button>
+            </div>
         </div>
+
+        <div id="i" class="tab-content">
+            <div class="card" style="border-color: var(--blue);">
+                <p><b>Port 22:</b> SSH | <b>Port 80:</b> HTTP | <b>Port 443:</b> HTTPS</p>
+            </div>
+        </div>
+
+        <div id="n" class="tab-content">
+            <div class="card" style="border-color: var(--purple);">
+                <textarea id="notes" placeholder="Notların..."></textarea>
+                <button class="save-btn" onclick="save()">KAYDET</button>
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2026 K-CMD | Geliştirici: Kadir | Tüm Hakları Saklıdır.
+        </footer>
     </div>
 </div>
 
 <script>
+    // ŞİFRE KONTROLÜ
+    function checkAuth() {
+        const pass = document.getElementById('passInput').value;
+        if(pass === 'kadir123') { // BURADAN ŞİFREYİ DEĞİŞTİREBİLİRSİN
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('main-interface').style.display = 'block';
+            document.title = "K-CMD // Karargah";
+        } else {
+            document.getElementById('msg').innerText = "ACCESS DENIED: INVALID CODE";
+            document.getElementById('passInput').value = "";
+        }
+    }
+
+    // ENTER TUŞU İLE GİRİŞ
+    document.getElementById('passInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') checkAuth();
+    });
+
     function tab(e, id) {
         document.querySelectorAll('.tab-content').forEach(x => x.style.display = 'none');
         document.querySelectorAll('.nav-btn').forEach(x => x.classList.remove('active'));
@@ -96,7 +157,7 @@
     }
     function save() {
         localStorage.setItem('kcmd_notes', document.getElementById('notes').value);
-        alert("Sistem Notları Güncellendi.");
+        alert("Senkronize edildi.");
     }
     function add() {
         let ip = prompt("Target:");
