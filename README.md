@@ -37,17 +37,15 @@ Sızma testi süreçlerinde en sık analiz edilen servisler:
 
 ---
 
+## ⚠️ Yasal Uyarı (Disclaimer)
+
+Bu araç sadece **eğitim** ve **etik sızma testleri** amacıyla geliştirilmiştir. İzinsiz sistemlere karşı kullanımı yasal sorumluluk doğurabilir. Kullanıcı, yaptığı eylemlerden bizzat sorumludur.
+
+**Geliştirici:** [Kadir]
+
 ## 🛠️ Kurulum ve Çalıştırma
 
 Bu projeyi bilgisayarınıza klonlamak için terminale şu komutu yazın:
 
 ```bash
 git clone [https://github.com/apo536098-wq/K-CMD.git](https://github.com/apo536098-wq/K-CMD.git)
-
-
-
-## ⚠️ Yasal Uyarı (Disclaimer)
-
-Bu araç sadece **eğitim** ve **etik sızma testleri** amacıyla geliştirilmiştir. İzinsiz sistemlere karşı kullanımı yasal sorumluluk doğurabilir. Kullanıcı, yaptığı eylemlerden bizzat sorumludur.
-
-**Geliştirici:** [Kadir]
